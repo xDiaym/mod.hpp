@@ -3,7 +3,9 @@
 #include <numeric>
 #include <cassert>
 
-#define NOTREACHED() assert(false && "Can't be reached");
+namespace mod {
+  constexpr int gcdex(int, int, int&, int&) noexcept;
+}
 
 namespace mod {
 
@@ -75,16 +77,12 @@ class Mod {
     return value_;
   }
 
-  // Use optimal algo
   constexpr std::optional<Self> Inverse() const noexcept {
-    if (std::gcd(value_, mod_) != 1)
+    int x, y;
+    T g = gcdex(value_, mod_, x, y);
+    if (g != 1)
       return std::nullopt;
-    for (int i = 1; i < mod_; ++i) {
-      auto val = Self(value_ * i);
-      if (val == 1)
-        return Self(i);
-    }
-    NOTREACHED();
+    return Self(x % mod_ + mod_);
   }
 
  private:
