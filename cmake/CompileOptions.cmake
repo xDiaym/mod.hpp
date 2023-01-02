@@ -1,0 +1,18 @@
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+if(MSVC)
+    add_compile_options(/W4 /Oy-)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic -g -fno-omit-frame-pointer)
+endif()
+
+if(MOD_DEBUG)
+    message(NOTICE "Turn warnings into errors")
+    if(MSVC)
+        add_compile_options(/Wx)
+    else()
+        add_compile_options(-Werror)
+    endif()
+endif()
