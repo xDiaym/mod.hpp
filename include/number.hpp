@@ -19,54 +19,54 @@ class Mod {
   constexpr Mod(T val) : value_(val % mod_) {
   }
 
-  constexpr Self operator+(const Self& other) {
+  constexpr Self operator+(const Self& other) const noexcept {
     return {value_ + other.value_};
   }
 
-  constexpr Self operator-(const Self& other) {
+  constexpr Self operator-(const Self& other) const noexcept {
     return {value_ - other.value_};
   }
 
-  constexpr Self operator*(const Self& other) {
+  constexpr Self operator*(const Self& other) const noexcept {
     return {value_ * other.value_};
   }
 
-  constexpr Self operator/(const Self& other) {
+  constexpr Self operator/(const Self& other) const noexcept {
     return {value_ / other.value_};
   }
 
-  constexpr Self operator%(const Self& other) {
+  constexpr Self operator%(const Self& other) const noexcept {
     return {value_ % other.value_};
   }
 
-  constexpr Self& operator+=(const Self& other) {
+  constexpr Self& operator+=(const Self& other) noexcept {
     value_ = (value_ + other.value_) % mod_;
     return *this;
   }
 
-  constexpr Self& operator-=(const Self& other) {
+  constexpr Self& operator-=(const Self& other) noexcept {
     value_ = (value_ - other.value_) % mod_;
     return *this;
   }
 
-  constexpr Self& operator*=(const Self& other) {
+  constexpr Self& operator*=(const Self& other) noexcept {
     value_ = (value_ * other.value_) % mod_;
     return *this;
   }
 
-  constexpr Self& operator/=(const Self& other) {
+  constexpr Self& operator/=(const Self& other) noexcept {
     value_ = (value_ / other.value_) % mod_;
     return *this;
   }
 
-  constexpr Self& operator%=(const Self& other) {
+  constexpr Self& operator%=(const Self& other) noexcept {
     value_ = (value_ / other.value_) % mod_;
     return *this;
   }
 
-  template <typename U>  // TODO: concept
-  std::strong_ordering operator<=>(U other) {
-    return value_.operator<=>(other);
+  template <typename U>
+  auto operator<=>(U other) const noexcept {
+    return value_ <=> other;
   }
 
   constexpr operator T() const noexcept {
@@ -75,6 +75,10 @@ class Mod {
 
   constexpr T Value() const noexcept {
     return value_;
+  }
+
+  constexpr T GetMod() const noexcept {
+    return mod_;
   }
 
   constexpr std::optional<Self> Inverse() const noexcept {
