@@ -17,6 +17,7 @@ std::ostream& operator<<(std::ostream& os, std::optional<T> opt) {
 
 int main() {
   using namespace mod;
-  auto a = IMod256(7);
+  auto a = IMod256(257);
+  std::cout << a - IMod256(2) << std::endl;
   std::cout << Pow(a, 1024) << '\n' << a.Inverse() << '\n';
 }
