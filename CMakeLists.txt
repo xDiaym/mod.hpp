@@ -3,6 +3,8 @@ project(mod LANGUAGES CXX VERSION 0.1.0)
 
 option(MOD_DEBUG "Enable Mod debug mode" ON)
 
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(cmake/CompileOptions.cmake)
 
 add_library(mod INTERFACE)
