@@ -21,7 +21,7 @@ namespace mod {
 template <typename T, T mod_>
 class Mod {
   static_assert(std::is_integral_v<T>, "T must be integral type");
-  static_assert(mod_ > 1, "mod_ must be >= 0");
+  static_assert(mod_ > 1, "mod_ must be > 1");
   static_assert(mod_ <= std::numeric_limits<T>::max(),
     "mod_ cant be greater than std::numeric_limits<T>::max()");
   static_assert(!std::is_reference_v<T>, "Reference types are not supported");
